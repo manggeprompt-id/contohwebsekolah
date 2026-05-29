@@ -124,7 +124,7 @@
         <div id="heroSlider" class="hero-slider"></div>
         <div class="container hero-content">
             <h1 class="display-4 fw-bold" id="heroJudul">SDN CONTOH</h1>
-            <p class="lead mt-3 mb-4" id="heroSubjudul">DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA KAB. DONGGALA</p>
+            <p class="lead mt-3 mb-4" id="heroSubjudul">DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA</p>
             <a href="#" class="btn btn-warning btn-lg fw-bold rounded-pill px-4 shadow mb-3" id="heroTombol" target="_blank">Pendaftaran Siswa Baru</a>
             <div class="admin-panel mt-3">
                 <label class="btn btn-light btn-sm text-dark shadow"><i class="fas fa-camera me-1"></i>Tambah Gambar Background Hero
@@ -310,7 +310,7 @@
             </div>
             <hr style="border-color: #495057;" class="my-4">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small" style="color: #868e96;">
-                <span class="mb-2 mb-md-0">&copy; 2026 Dinas Pendidikan, Pemuda, dan Olahraga Kabupaten Donggala.</span>
+                <span class="mb-2 mb-md-0">&copy; 2026 Dinas Pendidikan, Pemuda, dan Olahraga.</span>
                 <span>Hak Cipta Dilindungi Undang-Undang. <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginGembok" class="text-secondary text-decoration-none ms-2">@</a></span>
             </div>
         </div>
@@ -450,6 +450,13 @@
                                 <small class="text-muted d-block mt-1">Logo akan langsung terganti saat file dipilih.</small>
                             </div>
 
+                            <div class="mb-4 p-3 bg-white border rounded shadow-sm">
+                                <label class="form-label fw-bold text-primary mb-2">Kelola Gambar Latar Depan (Hero)</label>
+                                <div id="adminHeroList" class="row g-2 mt-1">
+                                    <div class="col-12 text-muted small"><div class="spinner-border spinner-border-sm text-primary"></div> Memuat gambar...</div>
+                                </div>
+                                <small class="text-muted d-block mt-2">Gambar yang dihapus akan langsung hilang dari slider halaman depan.</small>
+                            </div>
                             <form id="formConfig">
                                 <h6 class="text-primary fw-bold mb-3 border-bottom pb-2">Link Aplikasi Eksternal</h6>
                                 <div class="mb-3"><label class="form-label fw-semibold">Link Formulir SPMB</label><input type="text" class="form-control" id="urlSpmbIn"></div>
@@ -480,7 +487,7 @@
     <script>
         // ==============================================================
         // MASUKKAN URL GOOGLE APPS SCRIPT DI SINI
-        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1PUxUSkpG-s_RYcOaxtzs0YWpygiTI9b-De-TkXLsldjHVls6YrLTkASqiGtRuCjF4Q/exec";
+        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz44mqk7lugZXTXn91kgV0AHPibtFdni2Gb3JCaF_Rs6JRrCtqPI3zmJp-OTGSSV1dp1g/exec";
         // ==============================================================
 
         let globalBeritaData = []; 
@@ -573,7 +580,7 @@
                 document.getElementById('navBukuTamuLink').href = linkBukuTamu; document.getElementById('mobileNavBukuTamuLink').href = linkBukuTamu;
                 
                 document.getElementById('heroJudul').textContent = s.Judul_Hero || "SDN CONTOH";
-                document.getElementById('heroSubjudul').textContent = s.Subjudul_Hero || "DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA KAB. DONGGALA";
+                document.getElementById('heroSubjudul').textContent = s.Subjudul_Hero || "DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA";
                 
                 const heroSlider = document.getElementById('heroSlider');
                 if (data.heroBgs && data.heroBgs.length > 0) {
@@ -596,6 +603,25 @@
                     }
                 } else {
                     const slide = document.createElement('div'); slide.className = 'hero-slide'; slide.style.backgroundImage = `url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80&fit=crop')`; slide.style.transform = 'translateX(0)'; heroSlider.appendChild(slide);
+                }
+
+                // Render list Hero BG di panel Admin
+                const adminHeroList = document.getElementById('adminHeroList');
+                if (adminHeroList) {
+                    if (data.heroBgs && data.heroBgs.length > 0) {
+                        adminHeroList.innerHTML = data.heroBgs.map(bg => `
+                            <div class="col-4 col-md-3">
+                                <div class="position-relative shadow-sm rounded overflow-hidden border">
+                                    <img src="${fixGoogleDriveLink(bg[2])}" class="w-100" style="height: 70px; object-fit: cover;">
+                                    <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1" style="padding: 0px 6px;" onclick="hapusHeroBg('${bg[0]}')" title="Hapus Gambar">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        adminHeroList.innerHTML = '<div class="col-12 text-muted small">Belum ada gambar custom (masih menggunakan gambar bawaan).</div>';
+                    }
                 }
 
                 if (s.BG_Dana_BOS) { document.getElementById('danabos').style.backgroundImage = `url('${fixGoogleDriveLink(s.BG_Dana_BOS)}')`; }
@@ -965,6 +991,13 @@
             }); 
         }
         function hapusFoto(id) { if(confirm("Hapus foto ini?")) fetch(GAS_WEB_APP_URL, { method: 'POST', mode: 'cors', body: JSON.stringify({ action: "hapus_galeri", id: id }) }).then(() => window.location.reload()); }
+
+        function hapusHeroBg(id) { 
+            if(confirm("Yakin ingin menghapus gambar latar ini?")) {
+                fetch(GAS_WEB_APP_URL, { method: 'POST', mode: 'cors', body: JSON.stringify({ action: "hapus_hero", id: id }) })
+                .then(() => window.location.reload()); 
+            } 
+        }
 
         document.querySelectorAll('.bottom-nav a').forEach(link => { link.addEventListener('click', function() { if(!this.classList.contains('login-btn') && !this.classList.contains('admin-panel') && !this.hasAttribute('target')) { document.querySelectorAll('.bottom-nav a').forEach(nav => nav.classList.remove('active')); this.classList.add('active'); } }); });
     </script>
