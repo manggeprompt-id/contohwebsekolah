@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Resmi SDN 8 Pinembani - Kabupaten Donggala</title>
+    <title>Website Resmi SDN 8 Pinembani - Kabupaten Donggala</title>
     <meta name="description" content="Portal Informasi Resmi, Layanan Digital, SPMB, dan Transparansi Dana BOS SDN 8 Pinembani, Kabupaten Donggala.">
-    <meta property="og:title" content="Portal Resmi SDN 8 Pinembani - Kab. Donggala">
+    <meta property="og:title" content="Website Resmi SDN 8 Pinembani - Kab. Donggala">
     <meta property="og:description" content="Portal Informasi Resmi, Pengumuman, Layanan Digital & Transparansi Dana BOS SDN 8 Pinembani.">
     <meta property="og:image" content="https://i.ibb.co.com/5xhN0cm1/Logo-Donggala.png">
     <meta name="theme-color" content="#FF5A5F">
@@ -59,19 +59,32 @@
             -webkit-backdrop-filter: blur(8px);
         }
 
+        /* Hero Slider Transition */
+        .hero-slide-item {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.2s ease-in-out, transform 6s ease-out;
+            opacity: 0;
+            transform: scale(1.04);
+        }
+        .hero-slide-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
         /* Hide Scrollbar for Horizontal Ribbon */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Responsive Navigation Rules */
-        @media (min-width: 1024px) {
-            .desktop-sidebar { display: flex !important; }
-            .main-content-area { margin-left: 260px; padding-bottom: 0; }
+        /* Responsive Layout (Top Navbar Desktop & Bottom Nav Mobile) */
+        @media (min-width: 768px) {
+            .main-content-wrapper { padding-bottom: 0; }
             .mobile-bottom-nav { display: none !important; }
         }
-        @media (max-width: 1023px) {
-            .desktop-sidebar { display: none !important; }
-            .main-content-area { margin-left: 0; padding-bottom: 85px; }
+        @media (max-width: 767px) {
+            .main-content-wrapper { padding-bottom: 80px; }
             .mobile-bottom-nav { display: flex !important; }
         }
 
@@ -117,104 +130,64 @@
         </div>
     </div>
 
-    <!-- FIXED LEFT SIDEBAR (Desktop) -->
-    <aside class="desktop-sidebar fixed top-0 left-0 bottom-0 w-[260px] bg-white border-r border-slate-200/80 flex-col justify-between z-40 px-4 py-6">
-        <div>
-            <!-- Brand Identity -->
-            <a href="#beranda" class="flex items-center gap-3 px-2 mb-8">
-                <img id="sideLogo" src="https://i.ibb.co.com/5xhN0cm1/Logo-Donggala.png" alt="Logo" class="w-10 h-10 object-contain rounded-xl bg-coral-50 p-1 border border-coral-100">
-                <div>
-                    <h1 id="sideBrandTitle" class="font-extrabold text-base text-slate-900 leading-tight">SDN 8 Pinembani</h1>
-                    <p class="text-[11px] font-semibold text-coral-500 tracking-wide">KAB. DONGGALA</p>
-                </div>
-            </a>
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-content-wrapper min-h-screen flex flex-col justify-between">
 
-            <!-- Navigation Links -->
-            <nav class="space-y-1">
-                <a href="#beranda" onclick="window.app.setActiveNav(this)" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold bg-coral-50 text-coral-500 transition">
-                    <i class="fas fa-compass w-5 text-center"></i> Beranda
-                </a>
-                <a href="#aplikasi" onclick="window.app.setActiveNav(this)" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fas fa-th-large w-5 text-center"></i> Layanan Digital
-                </a>
-                <a href="#berita" onclick="window.app.setActiveNav(this)" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fas fa-newspaper w-5 text-center"></i> Berita & Info
-                </a>
-                <a href="#profil" onclick="window.app.setActiveNav(this)" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fas fa-school w-5 text-center"></i> Profil & Visi Misi
-                </a>
-                <a href="#danabos" onclick="window.app.setActiveNav(this)" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fas fa-chart-pie w-5 text-center"></i> Transparansi BOS
-                </a>
-                <a href="#galeri" onclick="window.app.setActiveNav(this)" class="nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fas fa-images w-5 text-center"></i> Galeri Kegiatan
-                </a>
-                <button onclick="window.app.openSpmbModal('SPMB')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition text-left">
-                    <i class="fas fa-user-plus w-5 text-center text-coral-500"></i> Pendaftaran SPMB
-                </button>
-                <button onclick="window.app.openSpmbModal('BUKU_TAMU')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition text-left">
-                    <i class="fas fa-book-open w-5 text-center text-emerald-600"></i> Buku Tamu Digital
-                </button>
-            </nav>
-        </div>
-
-        <!-- Bottom Auth / CMS Panel Button -->
-        <div class="pt-4 border-t border-slate-100 space-y-2">
-            <div id="sidebarUserBadge" class="hidden px-3 py-2 bg-slate-50 rounded-xl border border-slate-200/60 mb-2">
-                <p class="text-[11px] text-slate-400 font-medium">Masuk sebagai:</p>
-                <p id="sidebarUserName" class="text-xs font-bold text-slate-800 truncate">Administrator</p>
-                <span id="sidebarUserRole" class="inline-block mt-0.5 px-2 py-0.5 text-[10px] font-bold bg-coral-100 text-coral-600 rounded-full">ADMIN</span>
-            </div>
-
-            <button id="btnOpenCmsSide" onclick="window.app.openCmsModal()" class="hidden w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center gap-2">
-                <i class="fas fa-sliders-h"></i> Buka Panel CMS
-            </button>
-
-            <button id="btnLoginSide" onclick="window.app.openLoginModal()" class="w-full py-2.5 px-4 bg-coral-500 hover:bg-coral-600 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center gap-2">
-                <i class="fas fa-lock"></i> Login Staf / Admin
-            </button>
-
-            <button id="btnLogoutSide" onclick="window.app.logout()" class="hidden w-full py-2 px-4 border border-rose-200 text-rose-600 hover:bg-rose-50 font-bold text-xs rounded-xl transition flex items-center justify-center gap-2">
-                <i class="fas fa-sign-out-alt"></i> Keluar Sesi
-            </button>
-        </div>
-    </aside>
-
-    <!-- MAIN CONTENT AREA -->
-    <div class="main-content-area min-h-screen flex flex-col justify-between">
-
-        <!-- TOP UTILITY BAR & HEADER (AirNest Style) -->
-        <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100">
+        <!-- TOP STICKY NAVBAR (Posisi Awal di Atas Layar + Gaya AirNest) -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
             <!-- Top Utility Bar -->
             <div class="bg-slate-50 border-b border-slate-200/60 px-4 lg:px-8 py-1.5 text-[11px] text-slate-500 flex items-center justify-between">
-                <div class="flex items-center gap-2 truncate">
-                    <i class="fas fa-map-marker-alt text-coral-500"></i>
-                    <span id="topBarAlamat" class="truncate">Kec. Pinembani, Kabupaten Donggala, Sulawesi Tengah</span>
-                </div>
-                <div class="hidden sm:flex items-center gap-4 font-medium">
-                    <span class="flex items-center gap-1.5"><i class="fas fa-building text-slate-400"></i> Dinas Dikpora Kab. Donggala</span>
-                    <span id="topBarEmail" class="flex items-center gap-1.5"><i class="fas fa-envelope text-slate-400"></i> sdn8pinembani@gmail.com</span>
+                <div class="max-w-7xl w-full mx-auto flex items-center justify-between">
+                    <div class="flex items-center gap-2 truncate">
+                        <i class="fas fa-map-marker-alt text-coral-500"></i>
+                        <span id="topBarAlamat" class="truncate">Kec. Pinembani, Kabupaten Donggala, Sulawesi Tengah</span>
+                    </div>
+                    <div class="hidden sm:flex items-center gap-4 font-medium">
+                        <span class="flex items-center gap-1.5"><i class="fas fa-building text-slate-400"></i> Dinas Dikpora Kab. Donggala</span>
+                        <span id="topBarEmail" class="flex items-center gap-1.5"><i class="fas fa-envelope text-slate-400"></i> sdn8pinembani@gmail.com</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Mobile & Tablet Top Bar -->
-            <div class="px-4 lg:px-8 py-3 flex items-center justify-between">
-                <div class="flex items-center gap-2.5 lg:hidden">
-                    <img id="mobLogo" src="https://i.ibb.co.com/5xhN0cm1/Logo-Donggala.png" alt="Logo" class="w-8 h-8 object-contain">
-                    <span id="mobBrandTitle" class="font-extrabold text-slate-900 text-base">SDN 8 Pinembani</span>
-                </div>
-                <div class="hidden lg:flex items-center gap-2 text-xs font-semibold text-slate-500">
-                    <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700"><i class="fas fa-check-circle text-emerald-500 mr-1"></i>Portal Resmi Terverifikasi</span>
-                </div>
+            <!-- Main Navbar (Menu Horizontal di Atas seperti posisi awal) -->
+            <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+                <!-- Logo & Nama Sekolah -->
+                <a href="#beranda" class="flex items-center gap-2.5 flex-shrink-0">
+                    <img id="navLogo" src="https://i.ibb.co.com/5xhN0cm1/Logo-Donggala.png" alt="Logo" class="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-xl bg-coral-50 p-1 border border-coral-100">
+                    <div>
+                        <span id="navBrandText" class="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight block leading-none">SDN 8 Pinembani</span>
+                        <span class="text-[10px] font-bold text-coral-500 tracking-wider uppercase">Kab. Donggala</span>
+                    </div>
+                </a>
+
+                <!-- Menu Horizontal Desktop (Sesuai Posisi Awal) -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <a href="#beranda" onclick="window.app.setActiveNav(this)" class="top-nav-link px-3 py-2 text-xs lg:text-sm font-bold text-coral-500 border-b-2 border-coral-500 transition">Beranda</a>
+                    <a href="#berita" onclick="window.app.setActiveNav(this)" class="top-nav-link px-3 py-2 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">Berita</a>
+                    <a href="#profil" onclick="window.app.setActiveNav(this)" class="top-nav-link px-3 py-2 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">Profil & Visi Misi</a>
+                    <a href="#danabos" onclick="window.app.setActiveNav(this)" class="top-nav-link px-3 py-2 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">Dana BOS</a>
+                    <a href="#aplikasi" onclick="window.app.setActiveNav(this)" class="top-nav-link px-3 py-2 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">Layanan</a>
+                    <a href="#galeri" onclick="window.app.setActiveNav(this)" class="top-nav-link px-3 py-2 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">Galeri</a>
+                    <button onclick="window.app.openSpmbModal('SPMB')" class="px-3 py-1.5 text-xs lg:text-sm font-extrabold text-amber-600 hover:text-amber-700 transition">SPMB</button>
+                    <button onclick="window.app.openSpmbModal('BUKU_TAMU')" class="px-3 py-1.5 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 transition">Buku Tamu</button>
+                </nav>
+
+                <!-- Tombol Aksi Kanan (Login / CMS / Logout) -->
                 <div class="flex items-center gap-2">
-                    <button onclick="window.app.openSpmbModal('BUKU_TAMU')" class="px-3 py-1.5 rounded-full border border-slate-200 hover:border-slate-300 text-xs font-bold text-slate-700 transition">
-                        <i class="fas fa-book-open text-coral-500 mr-1"></i> Buku Tamu
+                    <span id="navUserBadge" class="hidden lg:inline-block px-2.5 py-1 bg-slate-100 text-slate-700 rounded-full text-[11px] font-bold truncate max-w-[130px]">
+                        Admin
+                    </span>
+
+                    <button id="btnOpenCmsTop" onclick="window.app.openCmsModal()" class="hidden px-3.5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                        <i class="fas fa-cogs text-coral-500"></i> <span>CMS</span>
                     </button>
-                    <button onclick="window.app.openSpmbModal('SPMB')" class="px-3.5 py-1.5 rounded-full bg-coral-500 hover:bg-coral-600 text-white text-xs font-bold shadow-sm transition">
-                        Daftar SPMB
+
+                    <button id="btnLogoutTop" onclick="window.app.logout()" class="hidden px-3.5 py-2 rounded-full border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fas fa-sign-out-alt"></i> <span class="hidden sm:inline">Logout</span>
                     </button>
-                    <button id="btnTopCmsMob" onclick="window.app.openCmsModal()" class="hidden lg:hidden px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs font-bold">
-                        <i class="fas fa-sliders-h"></i> CMS
+
+                    <button id="btnLoginTop" onclick="window.app.openLoginModal()" class="px-4 py-2 rounded-full bg-coral-500 hover:bg-coral-600 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                        <i class="fas fa-lock text-[10px]"></i> <span>Log in</span>
                     </button>
                 </div>
             </div>
@@ -223,22 +196,25 @@
         <!-- MAIN BODY -->
         <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 space-y-12">
 
-            <!-- 1. HERO SECTION (AirNest Split Contrast Style) -->
+            <!-- 1. HERO SECTION (AirNest Split Contrast + Dynamic Multi-Slide + Tombol Upload Hero) -->
             <section id="beranda" class="relative">
-                <div class="relative rounded-3xl overflow-hidden min-h-[420px] lg:min-h-[460px] flex items-center shadow-sm border border-slate-100">
-                    <!-- Background Image Slider -->
-                    <div id="heroBgElement" class="absolute inset-0 bg-cover bg-center transition-all duration-1000" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80&fit=crop');"></div>
-                    <!-- Soft White-to-Transparent Left Gradient Overlay (AirNest Signature) -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-slate-900/20"></div>
+                <div class="relative rounded-3xl overflow-hidden min-h-[430px] lg:min-h-[480px] flex items-center shadow-sm border border-slate-100">
+                    <!-- Dynamic Hero Slider Container -->
+                    <div id="heroSliderContainer" class="absolute inset-0 z-0 bg-slate-900">
+                        <!-- Slide items dirender oleh JS -->
+                    </div>
+
+                    <!-- Soft White-to-Transparent Left Gradient Overlay -->
+                    <div class="absolute inset-0 z-10 bg-gradient-to-r from-white/95 via-white/80 to-slate-900/25 pointer-events-none"></div>
 
                     <!-- Hero Text Content -->
-                    <div class="relative z-10 max-w-xl p-6 sm:p-10 lg:p-12">
+                    <div class="relative z-20 max-w-xl p-6 sm:p-10 lg:p-12">
                         <p id="heroSubjudul" class="text-coral-500 font-bold text-xs sm:text-sm uppercase tracking-wider mb-2">
                             DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA KAB. DONGGALA
                         </p>
-                        <h2 id="heroJudul" class="text-3xl sm:text-5xl font-extrabold text-slate-900 leading-[1.15] mb-4">
+                        <h1 id="heroJudul" class="text-3xl sm:text-5xl font-extrabold text-slate-900 leading-[1.15] mb-4">
                             SDN 8 Pinembani
-                        </h2>
+                        </h1>
                         <p id="heroTaglineDesc" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
                             Mewujudkan generasi cerdas, berkarakter, dan berdaya saing melalui layanan pendidikan dasar yang transparan serta inklusif di Kecamatan Pinembani.
                         </p>
@@ -247,11 +223,26 @@
                                 <span>Pendaftaran Siswa Baru</span>
                                 <i class="fas fa-arrow-right text-xs"></i>
                             </button>
-                            <a href="#danabos" class="px-5 py-3 bg-white/90 hover:bg-white text-slate-800 font-bold text-sm rounded-xl border border-slate-200 shadow-sm transition">
-                                Transparansi BOS
-                            </a>
+                            <button onclick="window.app.openSpmbModal('BUKU_TAMU')" class="px-5 py-3 bg-white/90 hover:bg-white text-slate-800 font-bold text-sm rounded-xl border border-slate-200 shadow-sm transition">
+                                Isi Buku Tamu
+                            </button>
+                        </div>
+
+                        <!-- TOMBOL UPLOAD GAMBAR BACKGROUND HERO LANGSUNG (Muncul saat Admin/Staf Login) -->
+                        <div class="staf-only hidden mt-5 pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-2">
+                            <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl shadow-md transition">
+                                <i class="fas fa-camera text-coral-500"></i>
+                                <span id="lblHeroUploadBtn">Tambah Gambar Background Hero</span>
+                                <input type="file" accept="image/*" multiple class="hidden" onchange="window.app.handleDirectHeroUpload(this)">
+                            </label>
+                            <button onclick="window.app.openHeroManagerInCms()" class="px-3.5 py-2 bg-white/90 hover:bg-white text-slate-700 border border-slate-200 text-xs font-bold rounded-xl shadow-sm transition">
+                                <i class="fas fa-images mr-1 text-coral-500"></i>Kelola Slide (<span id="heroSlideCountBadge">1</span>)
+                            </button>
                         </div>
                     </div>
+
+                    <!-- Indikator Dots Hero Slider -->
+                    <div id="heroDotsContainer" class="absolute bottom-12 right-6 z-20 flex items-center gap-1.5"></div>
                 </div>
 
                 <!-- 2. FLOATING OVERLAPPING STATISTIK BAR (AirNest Search Bar Style) -->
@@ -279,7 +270,7 @@
                         <p class="text-xs text-slate-500">Akses cepat portal layanan akademik dan manajemen sekolah</p>
                     </div>
                     <button onclick="window.app.openAppFormModal()" class="admin-only hidden px-3 py-1.5 bg-coral-50 text-coral-600 hover:bg-coral-100 rounded-xl text-xs font-bold transition">
-                        <i class="fas fa-plus mr-1"></i>Tambah Layanan
+                        <i class="fas fa-plus mr-1"></i>Tambah Aplikasi
                     </button>
                 </div>
 
@@ -454,12 +445,6 @@
                     <p id="footDeskripsi" class="text-xs text-slate-500 leading-relaxed mb-4">
                         Satuan Pendidikan Sekolah Dasar Negeri di bawah naungan Dinas Pendidikan, Pemuda dan Olahraga Kabupaten Donggala, Provinsi Sulawesi Tengah.
                     </p>
-                    <div class="flex items-center gap-2">
-                        <a id="socFb" href="#" target="_blank" class="hidden w-8 h-8 rounded-full bg-slate-200 hover:bg-coral-500 hover:text-white text-slate-600 flex items-center justify-center text-xs transition"><i class="fab fa-facebook-f"></i></a>
-                        <a id="socIg" href="#" target="_blank" class="hidden w-8 h-8 rounded-full bg-slate-200 hover:bg-coral-500 hover:text-white text-slate-600 flex items-center justify-center text-xs transition"><i class="fab fa-instagram"></i></a>
-                        <a id="socYt" href="#" target="_blank" class="hidden w-8 h-8 rounded-full bg-slate-200 hover:bg-coral-500 hover:text-white text-slate-600 flex items-center justify-center text-xs transition"><i class="fab fa-youtube"></i></a>
-                        <a id="socTt" href="#" target="_blank" class="hidden w-8 h-8 rounded-full bg-slate-200 hover:bg-coral-500 hover:text-white text-slate-600 flex items-center justify-center text-xs transition"><i class="fab fa-tiktok"></i></a>
-                    </div>
                 </div>
 
                 <div>
@@ -492,34 +477,37 @@
             </div>
 
             <div class="max-w-7xl mx-auto pt-6 border-t border-slate-200/70 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
-                <span>&copy; 2026 SDN 8 Pinembani. Hak Cipta Dilindungi.</span>
-                <button onclick="window.app.openLoginModal()" class="hover:text-coral-500 font-semibold">Portal Staf & Admin (@)</button>
+                <span>&copy; 2026 SDN 8 Pinembani. Hak Cipta Dilindungi Undang-Undang.</span>
+                <button onclick="window.app.openLoginModal()" class="hover:text-coral-500 font-semibold">@ Admin Area</button>
             </div>
         </footer>
 
     </div>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a id="waFloatLink" href="https://wa.me/6281234567890" target="_blank" title="Chat WhatsApp Sekolah" class="wa-pulse fixed bottom-24 lg:bottom-8 right-5 z-40 w-13 h-13 p-3.5 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg flex items-center justify-center text-2xl transition transform hover:scale-105">
+    <a id="waFloatLink" href="https://wa.me/6281234567890" target="_blank" title="Chat WhatsApp Sekolah" class="wa-pulse fixed bottom-20 md:bottom-8 right-5 z-40 w-13 h-13 p-3.5 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg flex items-center justify-center text-2xl transition transform hover:scale-105">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- MOBILE FLOATING BOTTOM NAVIGATION BAR -->
+    <!-- MOBILE FLOATING BOTTOM NAVIGATION BAR (Sesuai Posisi Awal untuk HP) -->
     <nav class="mobile-bottom-nav fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-2 justify-around items-center z-40 shadow-lg">
         <a href="#beranda" class="flex flex-col items-center text-[10px] font-bold text-coral-500">
-            <i class="fas fa-compass text-base mb-0.5"></i>Beranda
+            <i class="fas fa-home text-base mb-0.5"></i>Beranda
         </a>
         <a href="#berita" class="flex flex-col items-center text-[10px] font-semibold text-slate-500 hover:text-coral-500">
             <i class="fas fa-newspaper text-base mb-0.5"></i>Berita
         </a>
-        <a href="#danabos" class="flex flex-col items-center text-[10px] font-semibold text-slate-500 hover:text-coral-500">
-            <i class="fas fa-chart-pie text-base mb-0.5"></i>BOS
+        <a href="#profil" class="flex flex-col items-center text-[10px] font-semibold text-slate-500 hover:text-coral-500">
+            <i class="fas fa-school text-base mb-0.5"></i>Profil
         </a>
         <button onclick="window.app.openSpmbModal('SPMB')" class="flex flex-col items-center text-[10px] font-semibold text-slate-500 hover:text-coral-500">
             <i class="fas fa-user-plus text-base mb-0.5 text-coral-500"></i>SPMB
         </button>
+        <button onclick="window.app.openSpmbModal('BUKU_TAMU')" class="flex flex-col items-center text-[10px] font-semibold text-slate-500 hover:text-coral-500">
+            <i class="fas fa-book-open text-base mb-0.5"></i>Buku Tamu
+        </button>
         <button onclick="window.app.handleMobileAuthClick()" class="flex flex-col items-center text-[10px] font-semibold text-slate-500 hover:text-coral-500">
-            <i id="mobAuthIcon" class="fas fa-user-lock text-base mb-0.5"></i><span id="mobAuthLabel">Login</span>
+            <i id="mobAuthIcon" class="fas fa-lock text-base mb-0.5"></i><span id="mobAuthLabel">Admin</span>
         </button>
     </nav>
 
@@ -527,7 +515,7 @@
          MODALS (LOGIN HYBRID, DETAIL BERITA, SPMB/BUKU TAMU, CMS)
          ========================================================= -->
 
-    <!-- 1. MODAL LOGIN HYBRID (Admin via Supabase Auth & Guru/Staf via Tabel Database) -->
+    <!-- 1. MODAL LOGIN HYBRID -->
     <div id="loginModal" class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="glass-panel bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
             <button onclick="window.app.closeModal('loginModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500">
@@ -542,7 +530,6 @@
                 <p class="text-xs text-slate-500 mt-1">Pilih jenis akses akun Anda di bawah ini</p>
             </div>
 
-            <!-- Role Switcher Tabs -->
             <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-2xl mb-5">
                 <button type="button" id="tabBtnAdmin" onclick="window.app.switchLoginTab('admin')" class="py-2 text-xs font-bold rounded-xl bg-white text-slate-900 shadow-sm transition">
                     <i class="fas fa-user-shield mr-1 text-coral-500"></i>Admin (Auth)
@@ -563,7 +550,7 @@
                     <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:border-coral-500">
                 </div>
                 <button type="submit" id="btnSubmitLogin" class="w-full py-3 bg-coral-500 hover:bg-coral-600 text-white font-bold text-sm rounded-xl shadow-md transition">
-                    Masuk Sekarang
+                    Masuk Sistem
                 </button>
             </form>
         </div>
@@ -709,7 +696,7 @@
         </div>
     </div>
 
-    <!-- 7. MODAL MASTER CMS LENGKAP (Identitas, BOS, Statistik, Rekap SPMB/Tamu, Akun Guru) -->
+    <!-- 7. MODAL MASTER CMS LENGKAP (Identitas, Hero Slider, BOS, Statistik, Rekap SPMB/Tamu, Akun Guru) -->
     <div id="cmsModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
         <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-slate-100">
             <!-- Modal Header -->
@@ -725,8 +712,11 @@
 
             <!-- CMS Navigation Tabs -->
             <div class="flex overflow-x-auto no-scrollbar bg-slate-50 border-b border-slate-200 px-4 pt-2 gap-2">
-                <button onclick="window.app.switchCmsTab('tab-cms-profil', this)" class="cms-tab-btn px-4 py-2 text-xs font-bold rounded-t-xl bg-white text-coral-500 border-t border-x border-slate-200">
+                <button id="btnTabCmsProfil" onclick="window.app.switchCmsTab('tab-cms-profil', this)" class="cms-tab-btn px-4 py-2 text-xs font-bold rounded-t-xl bg-white text-coral-500 border-t border-x border-slate-200">
                     <i class="fas fa-school mr-1"></i>Identitas & Profil
+                </button>
+                <button id="btnTabCmsHero" onclick="window.app.switchCmsTab('tab-cms-hero', this)" class="cms-tab-btn px-4 py-2 text-xs font-bold rounded-t-xl text-slate-600 hover:text-slate-900">
+                    <i class="fas fa-camera-retro mr-1"></i>Gambar Background Hero
                 </button>
                 <button onclick="window.app.switchCmsTab('tab-cms-bos', this)" class="cms-tab-btn admin-only px-4 py-2 text-xs font-bold rounded-t-xl text-slate-600 hover:text-slate-900">
                     <i class="fas fa-coins mr-1"></i>Anggaran Dana BOS
@@ -788,7 +778,29 @@
                     </form>
                 </div>
 
-                <!-- TAB 2: DANA BOS -->
+                <!-- TAB 2: KELOLA & UPLOAD GAMBAR BACKGROUND HERO -->
+                <div id="tab-cms-hero" class="cms-tab-pane hidden space-y-5">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h4 class="text-sm font-extrabold text-slate-900">Unggah Foto Latar Depan (Hero Slider)</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Anda dapat memilih lebih dari 1 foto sekaligus. Foto otomatis dikompresi dan ditampilkan bergantian di halaman utama.</p>
+                        </div>
+                        <label class="cursor-pointer px-4 py-2.5 bg-coral-500 hover:bg-coral-600 text-white text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-2 flex-shrink-0">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="lblCmsHeroUpload">Pilih & Upload Foto Hero</span>
+                            <input type="file" accept="image/*" multiple class="hidden" onchange="window.app.handleDirectHeroUpload(this)">
+                        </label>
+                    </div>
+
+                    <div>
+                        <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Daftar Gambar Slider Hero Aktif</h5>
+                        <div id="cmsHeroGridList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            <!-- Diisi dinamis oleh JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: DANA BOS -->
                 <div id="tab-cms-bos" class="cms-tab-pane hidden space-y-4">
                     <form onsubmit="window.app.saveBosBatch(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -807,7 +819,7 @@
                     </form>
                 </div>
 
-                <!-- TAB 3: STATISTIK DINAMIS -->
+                <!-- TAB 4: STATISTIK DINAMIS -->
                 <div id="tab-cms-stat" class="cms-tab-pane hidden space-y-4">
                     <div id="cmsStatList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
                     <form onsubmit="window.app.addStatItem(event)" class="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
@@ -817,7 +829,7 @@
                     </form>
                 </div>
 
-                <!-- TAB 4: REKAP SPMB & BUKU TAMU -->
+                <!-- TAB 5: REKAP SPMB & BUKU TAMU -->
                 <div id="tab-cms-inbox" class="cms-tab-pane hidden space-y-3">
                     <div class="overflow-x-auto border border-slate-200 rounded-2xl">
                         <table class="w-full text-left text-xs">
@@ -836,10 +848,10 @@
                     </div>
                 </div>
 
-                <!-- TAB 5: KELOLA AKUN GURU / STAF (HYBRID LOGIN TABLE) -->
+                <!-- TAB 6: KELOLA AKUN GURU / STAF (HYBRID LOGIN TABLE) -->
                 <div id="tab-cms-staf" class="cms-tab-pane hidden space-y-4">
                     <div class="p-3.5 bg-coral-50 border border-coral-100 rounded-2xl text-xs text-coral-700">
-                        Akun Guru/Staf yang ditambahkan di bawah ini dapat login menggunakan tab <b>Guru / Staf</b> di halaman Login untuk membantu menulis berita dan mengunggah foto kegiatan.
+                        Akun Guru/Staf yang ditambahkan di bawah ini dapat login menggunakan tab <b>Guru / Staf</b> di halaman Login untuk membantu menulis berita, mengunggah foto galeri, dan mengganti gambar Hero.
                     </div>
                     <form onsubmit="window.app.addStafUser(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
                         <input type="text" id="stafUsername" required placeholder="Username / NIP" class="px-3 py-2 text-xs rounded-xl border border-slate-200">
@@ -869,7 +881,7 @@
 </div>
 
 <!-- =========================================================================
-     JAVASCRIPT MODULE (SUPABASE CLIENT + STATE MANAGEMENT + SERVICE WORKER)
+     JAVASCRIPT MODULE (SUPABASE CLIENT + HERO SLIDER UPLOAD + PWA)
      ========================================================================= -->
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
@@ -885,8 +897,12 @@
 
     // State Aplikasi
     let currentUser = null; // { role: 'admin' | 'staf', name: '', emailOrUser: '' }
+    let heroSliderTimer = null;
+    let currentHeroIndex = 0;
+
     let appState = {
         settings: {},
+        heroSlides: [],
         statistik: [],
         layanan: [],
         berita: [],
@@ -916,6 +932,10 @@
             Bos_Pengelolaan: "14200000",
             Bos_Pembiayaan: "6900000"
         };
+        appState.heroSlides = [
+            { id: "hr-1", judul: "Gedung Utama SDN 8 Pinembani", image_url: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80&fit=crop", urutan: 1 },
+            { id: "hr-2", judul: "Suasana Belajar Siswa", image_url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=80&fit=crop", urutan: 2 }
+        ];
         appState.statistik = [
             { id: "st-1", nama_stat: "Total Siswa", nilai_stat: "118 Siswa", ikon: "fa-users", urutan: 1 },
             { id: "st-2", nama_stat: "Pendidik & Tendik", nilai_stat: "11 Orang", ikon: "fa-chalkboard-teacher", urutan: 2 },
@@ -987,7 +1007,7 @@
     }
 
     // Kompresi Gambar Client-Side (Menghasilkan Data URI ringan)
-    function compressImageToDataUrl(file) {
+    function compressImageToDataUrl(file, maxW = 1200) {
         return new Promise((resolve) => {
             if (!file) return resolve("");
             const reader = new FileReader();
@@ -997,12 +1017,11 @@
                 img.src = e.target.result;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    const maxW = 900;
                     const scale = img.width > maxW ? maxW / img.width : 1;
                     canvas.width = img.width * scale;
                     canvas.height = img.height * scale;
                     canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-                    resolve(canvas.toDataURL('image/jpeg', 0.75));
+                    resolve(canvas.toDataURL('image/jpeg', 0.78));
                 };
             };
         });
@@ -1020,8 +1039,9 @@
         }
 
         try {
-            const [resSet, resStat, resApp, resBer, resGal] = await Promise.all([
+            const [resSet, resHero, resStat, resApp, resBer, resGal] = await Promise.all([
                 supabase.from('pengaturan_sekolah').select('*'),
+                supabase.from('hero_slides').select('*').order('created_at', { ascending: false }),
                 supabase.from('statistik').select('*').order('urutan', { ascending: true }),
                 supabase.from('layanan_aplikasi').select('*').order('urutan', { ascending: true }),
                 supabase.from('berita').select('*').order('created_at', { ascending: false }),
@@ -1030,6 +1050,7 @@
 
             appState.settings = {};
             (resSet.data || []).forEach(row => { appState.settings[row.kunci] = row.nilai; });
+            appState.heroSlides = resHero.data || [];
             appState.statistik = resStat.data || [];
             appState.layanan = resApp.data || [];
             appState.berita = resBer.data || [];
@@ -1052,6 +1073,52 @@
     }
 
     // =========================================================================
+    // RENDER HERO SLIDER DINAMIS
+    // =========================================================================
+    function renderHeroSlider() {
+        const container = document.getElementById('heroSliderContainer');
+        const dotsContainer = document.getElementById('heroDotsContainer');
+        const countBadge = document.getElementById('heroSlideCountBadge');
+
+        const slides = appState.heroSlides.length > 0
+            ? appState.heroSlides
+            : [{ id: 'default', judul: 'Default Hero', image_url: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80&fit=crop' }];
+
+        if (countBadge) countBadge.textContent = appState.heroSlides.length;
+
+        if (currentHeroIndex >= slides.length) currentHeroIndex = 0;
+
+        container.innerHTML = slides.map((sl, idx) => `
+            <div class="hero-slide-item ${idx === currentHeroIndex ? 'active' : ''}" style="background-image: url('${escapeHtml(sl.image_url)}');"></div>
+        `).join('');
+
+        if (slides.length > 1) {
+            dotsContainer.innerHTML = slides.map((_, idx) => `
+                <button onclick="window.app.goToHeroSlide(${idx})" class="h-2 rounded-full transition-all ${idx === currentHeroIndex ? 'w-6 bg-coral-500' : 'w-2 bg-white/70 hover:bg-white'}"></button>
+            `).join('');
+        } else {
+            dotsContainer.innerHTML = '';
+        }
+
+        if (heroSliderTimer) clearInterval(heroSliderTimer);
+        if (slides.length > 1) {
+            heroSliderTimer = setInterval(() => {
+                currentHeroIndex = (currentHeroIndex + 1) % slides.length;
+                updateHeroSlideActive();
+            }, 5500);
+        }
+    }
+
+    function updateHeroSlideActive() {
+        const items = document.querySelectorAll('#heroSliderContainer .hero-slide-item');
+        const dots = document.querySelectorAll('#heroDotsContainer button');
+        items.forEach((el, idx) => el.classList.toggle('active', idx === currentHeroIndex));
+        dots.forEach((dot, idx) => {
+            dot.className = `h-2 rounded-full transition-all ${idx === currentHeroIndex ? 'w-6 bg-coral-500' : 'w-2 bg-white/70 hover:bg-white'}`;
+        });
+    }
+
+    // =========================================================================
     // RENDER SELURUH ELEMEN UI
     // =========================================================================
     function renderAllUI() {
@@ -1059,7 +1126,7 @@
         const namaSekolah = s.Judul_Hero || "SDN 8 Pinembani";
 
         // Brand & Header
-        ['sideBrandTitle', 'mobBrandTitle', 'heroJudul', 'footBrandTitle'].forEach(id => {
+        ['navBrandText', 'heroJudul', 'footBrandTitle'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.textContent = namaSekolah;
         });
@@ -1075,6 +1142,9 @@
             if (wa.startsWith('08')) wa = '62' + wa.slice(1);
             document.getElementById('waFloatLink').href = `https://wa.me/${wa}`;
         }
+
+        // Render Hero Slider
+        renderHeroSlider();
 
         // 1. Render Floating Statistik Bar
         const statGrid = document.getElementById('statFloatingGrid');
@@ -1116,7 +1186,7 @@
             appRibbon.innerHTML = `<div class="text-xs text-slate-400 py-3">Belum ada pintasan aplikasi layanan.</div>`;
         }
 
-        // 3. Render Berita (AirNest 4-Column Cards)
+        // 3. Render Berita
         renderBerita();
 
         // 4. Render Profil & Visi Misi
@@ -1240,23 +1310,21 @@
         document.querySelectorAll('.staf-only').forEach(el => el.classList.toggle('hidden', !isLogged));
         document.querySelectorAll('.admin-only').forEach(el => el.classList.toggle('hidden', !isAdmin));
 
-        document.getElementById('sidebarUserBadge').classList.toggle('hidden', !isLogged);
-        document.getElementById('btnOpenCmsSide').classList.toggle('hidden', !isLogged);
-        document.getElementById('btnLoginSide').classList.toggle('hidden', isLogged);
-        document.getElementById('btnLogoutSide').classList.toggle('hidden', !isLogged);
-        document.getElementById('btnTopCmsMob').classList.toggle('hidden', !isLogged);
+        document.getElementById('navUserBadge').classList.toggle('hidden', !isLogged);
+        document.getElementById('btnOpenCmsTop').classList.toggle('hidden', !isLogged);
+        document.getElementById('btnLogoutTop').classList.toggle('hidden', !isLogged);
+        document.getElementById('btnLoginTop').classList.toggle('hidden', isLogged);
 
         const prevLogout = document.getElementById('btnPreviewLogout');
         if (prevLogout) prevLogout.classList.toggle('hidden', !isLogged);
 
         if (isLogged) {
-            document.getElementById('sidebarUserName').textContent = currentUser.name;
-            document.getElementById('sidebarUserRole').textContent = isAdmin ? 'ADMIN UTAMA' : 'GURU / STAF';
-            document.getElementById('mobAuthIcon').className = 'fas fa-sliders-h text-base mb-0.5 text-coral-500';
+            document.getElementById('navUserBadge').textContent = currentUser.name;
+            document.getElementById('mobAuthIcon').className = 'fas fa-cogs text-base mb-0.5 text-coral-500';
             document.getElementById('mobAuthLabel').textContent = 'CMS';
         } else {
-            document.getElementById('mobAuthIcon').className = 'fas fa-user-lock text-base mb-0.5';
-            document.getElementById('mobAuthLabel').textContent = 'Login';
+            document.getElementById('mobAuthIcon').className = 'fas fa-lock text-base mb-0.5';
+            document.getElementById('mobAuthLabel').textContent = 'Admin';
         }
     }
 
@@ -1265,10 +1333,78 @@
     // =========================================================================
     window.app = {
         setActiveNav(el) {
-            document.querySelectorAll('.nav-item').forEach(n => {
-                n.className = "nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition";
+            document.querySelectorAll('.top-nav-link').forEach(n => {
+                n.className = "top-nav-link px-3 py-2 text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition";
             });
-            el.className = "nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold bg-coral-50 text-coral-500 transition";
+            el.className = "top-nav-link px-3 py-2 text-xs lg:text-sm font-bold text-coral-500 border-b-2 border-coral-500 transition";
+        },
+
+        goToHeroSlide(idx) {
+            currentHeroIndex = idx;
+            updateHeroSlideActive();
+        },
+
+        // FITUR UPLOAD GAMBAR BACKGROUND HERO (Langsung dari Hero maupun dari CMS)
+        async handleDirectHeroUpload(inputEl) {
+            const files = inputEl.files;
+            if (!files || files.length === 0) return;
+
+            const lblHero = document.getElementById('lblHeroUploadBtn');
+            const lblCms = document.getElementById('lblCmsHeroUpload');
+            if (lblHero) lblHero.textContent = "Mengunggah foto...";
+            if (lblCms) lblCms.textContent = "Mengunggah...";
+
+            try {
+                for (let i = 0; i < files.length; i++) {
+                    const compressedDataUrl = await compressImageToDataUrl(files[i], 1400);
+                    const newSlide = {
+                        judul: files[i].name.replace(/\.[^/.]+$/, "") || "Background Hero SDN 8 Pinembani",
+                        image_url: compressedDataUrl,
+                        urutan: appState.heroSlides.length + 1
+                    };
+
+                    if (IS_PREVIEW) {
+                        appState.heroSlides.unshift({ id: 'hr-' + Date.now() + '-' + i, ...newSlide });
+                    } else {
+                        const { error } = await supabase.from('hero_slides').insert([newSlide]);
+                        if (error) throw error;
+                    }
+                }
+
+                if (!IS_PREVIEW) await loadAllData();
+                else renderAllUI();
+
+                window.app.renderCmsSubTables();
+                showToast(`${files.length} Gambar Background Hero berhasil ditambahkan!`);
+            } catch (err) {
+                showToast("Gagal mengunggah gambar Hero: " + err.message, true);
+            } finally {
+                if (lblHero) lblHero.textContent = "Tambah Gambar Background Hero";
+                if (lblCms) lblCms.textContent = "Pilih & Upload Foto Hero";
+                inputEl.value = "";
+            }
+        },
+
+        async deleteHeroSlide(id) {
+            if (!confirm("Hapus gambar latar Hero ini dari slider?")) return;
+            if (IS_PREVIEW) {
+                appState.heroSlides = appState.heroSlides.filter(h => String(h.id) !== String(id));
+                renderAllUI();
+                window.app.renderCmsSubTables();
+                return showToast("Gambar Hero dihapus!");
+            }
+            const { error } = await supabase.from('hero_slides').delete().eq('id', id);
+            if (error) return showToast("Gagal menghapus: " + error.message, true);
+            showToast("Gambar Hero berhasil dihapus!");
+            await loadAllData();
+            window.app.renderCmsSubTables();
+        },
+
+        openHeroManagerInCms() {
+            window.app.openCmsModal().then(() => {
+                const btnHeroTab = document.getElementById('btnTabCmsHero');
+                if (btnHeroTab) window.app.switchCmsTab('tab-cms-hero', btnHeroTab);
+            });
         },
 
         openModal(id) { document.getElementById(id).classList.remove('hidden'); },
@@ -1328,7 +1464,6 @@
 
             try {
                 if (mode === 'admin') {
-                    // 1. Login Admin via Supabase Auth
                     const { data, error } = await supabase.auth.signInWithPassword({
                         email: identifier,
                         password: pass
@@ -1336,7 +1471,6 @@
                     if (error) throw error;
                     currentUser = { role: 'admin', name: data.user.email, emailOrUser: data.user.email };
                 } else {
-                    // 2. Login Staf/Guru via Tabel Database Supabase
                     const { data, error } = await supabase
                         .from('staf_users')
                         .select('*')
@@ -1356,7 +1490,7 @@
                 showToast(err.message || "Gagal login!", true);
             } finally {
                 btn.disabled = false;
-                btn.textContent = "Masuk Sekarang";
+                btn.textContent = "Masuk Sistem";
             }
         },
 
@@ -1451,7 +1585,7 @@
 
             try {
                 let imgUrl = "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80&fit=crop";
-                if (file) imgUrl = await compressImageToDataUrl(file);
+                if (file) imgUrl = await compressImageToDataUrl(file, 950);
 
                 const newRow = {
                     judul,
@@ -1563,7 +1697,7 @@
             btn.textContent = "Mengunggah...";
 
             try {
-                const imgData = await compressImageToDataUrl(file);
+                const imgData = await compressImageToDataUrl(file, 950);
                 if (IS_PREVIEW) {
                     appState.galeri.unshift({ id: 'gl-' + Date.now(), judul, image_url: imgData });
                 } else {
@@ -1630,6 +1764,22 @@
         },
 
         renderCmsSubTables() {
+            // Daftar Slide Gambar Hero di CMS
+            const heroGrid = document.getElementById('cmsHeroGridList');
+            if (heroGrid) {
+                heroGrid.innerHTML = appState.heroSlides.length > 0 ? appState.heroSlides.map((h, i) => `
+                    <div class="group relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 h-32 shadow-sm">
+                        <img src="${escapeHtml(h.image_url)}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent flex items-end justify-between p-2.5">
+                            <span class="text-[10px] font-bold text-white truncate">Slide #${i + 1}</span>
+                            <button type="button" onclick="window.app.deleteHeroSlide('${escapeHtml(h.id)}')" class="w-7 h-7 rounded-lg bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center text-xs shadow">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('') : `<div class="col-span-4 text-xs text-slate-400 py-4 text-center bg-slate-50 rounded-xl">Belum ada gambar custom Hero (masih menggunakan gambar bawaan).</div>`;
+            }
+
             // Statistik List
             document.getElementById('cmsStatList').innerHTML = appState.statistik.map(st => `
                 <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
@@ -1781,7 +1931,6 @@
     // INISIALISASI SAAT HALAMAN DIMUAT & REGISTRASI PWA SERVICE WORKER (BLOB)
     // =========================================================================
     window.addEventListener('DOMContentLoaded', async () => {
-        // Pulihkan sesi login jika ada
         const savedSession = sessionStorage.getItem('sdn8_session_user');
         if (savedSession) {
             try { currentUser = JSON.parse(savedSession); } catch (e) {}
@@ -1795,7 +1944,6 @@
 
         await loadAllData();
 
-        // Register Dynamic Blob Service Worker untuk PWA 1-File
         if ('serviceWorker' in navigator) {
             const swCode = `
                 self.addEventListener('install', e => self.skipWaiting());
